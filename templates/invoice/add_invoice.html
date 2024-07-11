@@ -1,0 +1,54 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container m-3 " id="InvoiceHeaderContainer">
+        <h4>Add Invoice Details</h4>
+       <div class="d-flex flex-wrap justify-content-start" id="empty_form"> {{invoice_form.as_p}}</div>
+    </div>
+
+    <div class="container m-3 " id="emptyInlineContainer">
+        <h4>Add Billing Product and Service..</h4>
+       <div class="d-flex flex-wrap justify-content-evenly" id="empty_inline_form"> {{item_formset.as_p}} <div class='d-flex justify-content-center flex-column'> <button class="btn btn-danger" type="button" id="removemoreBtn" onclick= removeInlineSet(this) > Remove </button> </div></div>
+    </div>
+
+    <div class="d-flex justify-content-center gx-5">
+        <div class="m-1"> <button class="btn btn-primary" type="button" id="addmoreBtn" > Add More </button></div>
+        <div class="m-1"> <button id="procctorende" class="btn btn-warning" type="submit">Proceed to Render</button></div>
+    </div>
+    
+   
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript">
+    const addEl = document.getElementById('addmoreBtn')
+    const EmptyFormSet =   document.getElementById('empty_inline_form')
+    const mainContainer = document.getElementById('emptyInlineContainer')
+    addEl.addEventListener('click', (e)=>{
+        e.preventDefault()
+        const newnode = EmptyFormSet.cloneNode(true)
+        //mainContainer.insertBefore(newnode,addEl)
+        mainContainer.append(newnode)
+        
+    })
+    function removeInlineSet(button) {
+        // Add event listener to the button for click event
+        button.addEventListener('click', function(event) {
+          // Get the parent node of the button using parentNode property
+          const parentNode = this.parentNode.parentNode;
+      
+          // Remove the parent node from the DOM using remove() method
+          parentNode.remove();
+      
+          // Prevent default behavior if necessary (e.g., form submission)
+          //event.preventDefault();
+        });
+    }
+    
+  
+</script>
+{% endblock scripts %}
