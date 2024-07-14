@@ -1,1 +1,1 @@
-# Read this Ebfore starting
+# Read this before starting
