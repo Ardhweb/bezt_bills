@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'invoicemodule',
     'crispy_forms',
+    'docgen',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -82,18 +84,18 @@ WSGI_APPLICATION = 'bezt_bills.wsgi.application'
 #     }
 # }
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    },
-	'mysql': {
-		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'bezt_db',
-		'USER': 'root',
-		'PASSWORD': 'root',
-		'HOST':'localhost',
-		'PORT':'3306',
-	}
+    }
+	# 'mysql': {
+	# 	'ENGINE': 'django.db.backends.mysql',
+	# 	'NAME': 'bezt_db',
+	# 	'USER': 'root',
+	# 	'PASSWORD': 'root',
+	# 	'HOST':'localhost',
+	# 	'PORT':'3306',
+	# }
 }
 
 
