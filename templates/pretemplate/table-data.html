@@ -1,0 +1,56 @@
+<div class="container">
+   {% block content %}
+   
+  
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items  %}
+            <tr>
+                <td>{{item.desc}}</td>
+                <td><input class="borderless" type="number" id="qtyA" value="{{item.qty}}" min="0"></td>
+                <td><input type="number" class="singleprice borderless" id="priceA" value="{{item.price}}" step="0.01" min="0"></td>
+            </tr>
+            {% endfor %}
+            
+            <tr class="table-active">
+                <th scope="row">Total</th>
+                <td colspan="2"><input class="borderless" type="number" id="totalPrice" value=""></td>
+            </tr>
+        </tbody>
+    </table>
+    {% endblock content %}
+    <a class="btn btn-dark" onclick="calculateTotals()">Calculate Totals</a>
+</div>
+
+
+<script>
+   
+    function calculateTotals() {
+       
+        var totalPrice = 0;
+        var priceElements = document.getElementsByClassName('singleprice');
+        
+        for (var i = 0; i < priceElements.length; i++) {
+            var priceValue = priceElements[i].value;
+            
+            if (isNaN(priceValue)) {
+                console.log("Invalid price value at index " + i + ": " + priceValue);
+                continue;
+            }
+          
+            var price = parseFloat(priceValue);
+            totalPrice += price;
+            document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+        }
+        
+       
+    }
+</script>
+

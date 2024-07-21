@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<form method="post">
+<form method="post" class="container">
     {% csrf_token %}
     <div class="container m-3 " id="InvoiceHeaderContainer">
         <h4>Add Invoice Details</h4>
@@ -15,7 +15,7 @@
 
     <div class="d-flex justify-content-center gx-5">
         <div class="m-1"> <button class="btn btn-primary" type="button" id="addmoreBtn" > Add More </button></div>
-        <div class="m-1"> <a id="procctorende" class="btn btn-warning" type="submit">Proceed to Render</a></div>
+        <div class="m-1"> <button id="procctorende"  class="btn btn-warning" type="submit">Proceed to Render</button></div>
     </div>
     
    
