@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<form method="post" class="container">
+  {% csrf_token %}
+  <div class="container m-3 " id="InvoiceHeaderContainer">
+    <h4>Add Invoice Details</h4>
+    <div class="d-flex flex-wrap justify-content-start" id="empty_form">{{invoice_form.as_p}}</div>
+  </div>
+
+  <div class="container m-3 " id="emptyInlineContainer">
+    <h4>Add Billing Product and Service..</h4>
+    {{item_formset.management_form}}
+    <div class="d-flex flex-wrap justify-content-evenly" id="empty_inline_form">
+      {{item_formset.empty_form.as_p}}
+      <div class='d-flex justify-content-center flex-column'>
+        <button class="btn btn-danger" type="button" id="removemoreBtn" onclick="removeInlineSet(this)"> Remove </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center gx-5">
+    <div class="m-1">
+      <button class="btn btn-primary" type="button" id="addmoreBtn"> Add More </button>
+    </div>
+    <div class="m-1">
+      <button id="procctorende" class="btn btn-warning" type="submit">Proceed to Render</button>
+    </div>
+  </div>
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+<script type="text/javascript">
+    const addEl = document.getElementById('addmoreBtn');
+    const EmptyFormSet = document.getElementById('empty_inline_form');
+    const mainContainer = document.getElementById('emptyInlineContainer');
+    
+    let cloneCount = 0;
+    
+    function cloneNodeWithoutElement(node, excludeName) {
+      const clone = node.cloneNode(true); // Deep clone
+    
+      // Remove elements with the specified name attribute
+      const elementsToRemove = clone.querySelectorAll(`[name="${excludeName}"]`);
+      elementsToRemove.forEach(element => element.remove());
+    
+      // Increment clone count and update ID attributes
+      cloneCount++;
+      const elementsToUpdate = clone.querySelectorAll('[id*="__prefix__"]'); // Select elements with __prefix__ in the ID
+    
+      elementsToUpdate.forEach(element => {
+        element.id = element.id.replace(/__prefix__/g, cloneCount);
+        element.name = element.name.replace(/__prefix__/g, cloneCount);
+        //element.id = element.id.replace(/-0-/g, cloneCount);
+        //element.name = element.name.replace(/-0-/g, cloneCount);
+      });
+
+      // Update label for attributes referencing updated IDs
+  const labelsToUpdate = clone.querySelectorAll(`label[for*="__prefix__"]`);
+  labelsToUpdate.forEach(label => {
+    label.htmlFor = label.htmlFor.replace(/__prefix__/g, cloneCount);
+  });
+    
+      return clone;
+    }
+    
+    // ... rest of the code
+    
+    
+    
+    addEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newnode = cloneNodeWithoutElement(EmptyFormSet, 'your_exclude_name'); // Replace 'your_exclude_name' with the actual name
+      mainContainer.append(newnode);
+    });
+    
+    
+    function removeInlineSet(button) {
+        // Add event listener to the button for click event
+        button.addEventListener('click', function(event) {
+          // Get the parent node of the button using parentNode property
+          const parentNode = this.parentNode.parentNode;
+      
+          // Remove the parent node from the DOM using remove() method
+          parentNode.remove();
+      
+          // Prevent default behavior if necessary (e.g., form submission)
+          //event.preventDefault();
+        });
+    }
+    
+    function updateTotalForms(operation) {
+        const totalFormsInput = document.getElementsByName('invoiceitem_set-TOTAL_FORMS')[0];
+    
+        if (operation === 'add') {
+            const currentTotalForms = parseInt(totalFormsInput.value, 10);
+            totalFormsInput.value = currentTotalForms + 1;
+    
+            // Remove all elements except the first one with the specified name attribute
+            const elementsToRemove = document.getElementsByName('invoiceitem_set-INITIAL_FORMS');
+            for (let i = elementsToRemove.length - 1; i > 0; i--) {
+                elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+            }
+        } else if (operation === 'remove') {
+            const currentTotalForms = parseInt(totalFormsInput.value, 10);
+            if (currentTotalForms > 0) {
+                totalFormsInput.value = currentTotalForms - 1;
+            }
+        }
+    }
+    
+    const removeEl = document.getElementById('removemoreBtn');
+
+    
+    addEl.addEventListener('click', () => {
+        // Adjust the delay (in milliseconds) as needed (e.g., 500ms for 0.5 seconds)
+        setTimeout(() => updateTotalForms('add'), 500);
+    });
+    
+    removeEl.addEventListener('click', () => {
+        // Adjust the delay (in milliseconds) as needed
+        setTimeout(() => updateTotalForms('remove'), 1000); // 1 second
+    });
+    
+      
+      
+</script>
+{% endblock scripts %}

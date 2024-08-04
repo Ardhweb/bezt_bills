@@ -2,53 +2,122 @@
 
 {% block content %}
 <form method="post" class="container">
-    {% csrf_token %}
-    <div class="container m-3 " id="InvoiceHeaderContainer">
-        <h4>Add Invoice Details</h4>
-       <div class="d-flex flex-wrap justify-content-start" id="empty_form"> {{invoice_form.as_p}}</div>
-    </div>
+  {% csrf_token %}
+  
+  <div class="container m-3" id="InvoiceHeaderContainer">
+    <h4>Add Invoice Details</h4>
+    <div class="d-flex flex-wrap justify-content-start" id="empty_form">{{ invoice_form.as_p }}</div>
+  </div>
 
-    <div class="container m-3 " id="emptyInlineContainer">
-        <h4>Add Billing Product and Service..</h4>
-       <div class="d-flex flex-wrap justify-content-evenly" id="empty_inline_form"> {{item_formset.as_p}} <div class='d-flex justify-content-center flex-column'> <button class="btn btn-danger" type="button" id="removemoreBtn" onclick= removeInlineSet(this) > Remove </button> </div></div>
+  <div class="container m-3" id="emptyInlineContainer">
+    <h4>Add Billing Product and Service..</h4>
+    {{ item_formset.management_form }}
+    <div class="d-flex flex-wrap" id="empty_inline_form">
+      <!-- Render the first form as a template -->
+      <div class="formset-row d-flex align-items-center">
+        <div class="form-group flex-fill">
+          <label for="{{ item_formset.forms.0.desc.id_for_label }}">Description:</label>
+          {{ item_formset.forms.0.desc }}
+        </div>
+        <div class="form-group flex-fill">
+          <label for="{{ item_formset.forms.0.qty.id_for_label }}">Quantity:</label>
+          {{ item_formset.forms.0.qty }}
+        </div>
+        <div class="form-group flex-fill">
+          <label for="{{ item_formset.forms.0.price.id_for_label }}">Price:</label>
+          {{ item_formset.forms.0.price }}
+        </div>
+        <div class="form-group flex-fill">
+          <button type="button" class="btn btn-danger" onclick="removeForm(this)">Remove</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="d-flex justify-content-center gx-5">
-        <div class="m-1"> <button class="btn btn-primary" type="button" id="addmoreBtn" > Add More </button></div>
-        <div class="m-1"> <button id="procctorende"  class="btn btn-warning" type="submit">Proceed to Render</button></div>
+  <div class="d-flex justify-content-center gx-5">
+    <div class="m-1">
+      <button class="btn btn-primary" type="button" id="addmoreBtn">Add More</button>
     </div>
-    
-   
+    <div class="m-1">
+      <button id="procctorende" class="btn btn-warning" type="submit">Proceed to Render</button>
+    </div>
+  </div>
 </form>
-
 {% endblock content %}
 
 {% block scripts %}
 <script type="text/javascript">
-    const addEl = document.getElementById('addmoreBtn')
-    const EmptyFormSet =   document.getElementById('empty_inline_form')
-    const mainContainer = document.getElementById('emptyInlineContainer')
-    addEl.addEventListener('click', (e)=>{
-        e.preventDefault()
-        const newnode = EmptyFormSet.cloneNode(true)
-        //mainContainer.insertBefore(newnode,addEl)
-        mainContainer.append(newnode)
-        
-    })
-    function removeInlineSet(button) {
-        // Add event listener to the button for click event
-        button.addEventListener('click', function(event) {
-          // Get the parent node of the button using parentNode property
-          const parentNode = this.parentNode.parentNode;
-      
-          // Remove the parent node from the DOM using remove() method
-          parentNode.remove();
-      
-          // Prevent default behavior if necessary (e.g., form submission)
-          //event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('addmoreBtn');
+    const formsetContainer = document.getElementById('empty_inline_form');
+    const formTemplate = document.querySelector('.formset-row'); // Use the first form as template
+    let formCount = formsetContainer.querySelectorAll('.formset-row').length;
+
+    function cloneNodeWithoutElement(node) {
+        if (!node) {
+            console.error("Form template not found");
+            return null;
+        }
+
+        const clone = node.cloneNode(true); // Deep clone
+
+        // Increment form count and update IDs and names
+        formCount++;
+        //const elementsToUpdate = clone.querySelectorAll('[id*="__prefix__"]');
+        //elementsToUpdate.forEach(element => {
+        //    element.id = element.id.replace(/__prefix__/g, formCount);
+        //    element.name = element.name.replace(/__prefix__/g, formCount);
+        //});
+//
+        //const labelsToUpdate = clone.querySelectorAll(`label[for*="__prefix__"]`);
+        //labelsToUpdate.forEach(label => {
+        //    label.htmlFor = label.htmlFor.replace(/__prefix__/g, formCount);
+        //});
+        const elementsToUpdate = clone.querySelectorAll('[id*="0"]');
+        elementsToUpdate.forEach(element => {
+            element.id = element.id.replace(/0/g, formCount-1);
+            element.name = element.name.replace(/0/g, formCount-1);
         });
+
+        const labelsToUpdate = clone.querySelectorAll(`label[for*="0"]`);
+        labelsToUpdate.forEach(label => {
+            label.htmlFor = label.htmlFor.replace(/0/g, formCount-1);
+        });
+
+        return clone;
     }
-    
-  
+
+    addButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        const newNode = cloneNodeWithoutElement(formTemplate);
+        if (newNode) {
+            formsetContainer.appendChild(newNode);
+            updateTotalForms('add');
+        }
+    });
+
+    function removeForm(button) {
+        button.closest('.formset-row').remove();
+        updateTotalForms('remove');
+    }
+
+    function updateTotalForms(operation) {
+        const totalFormsInput = document.querySelector('input[name="invoiceitem_set-TOTAL_FORMS"]');
+        let currentTotalForms = parseInt(totalFormsInput.value, 10);
+
+        if (operation === 'add') {
+            totalFormsInput.value = currentTotalForms + 1;
+        } else if (operation === 'remove' && currentTotalForms > 1) {
+            totalFormsInput.value = currentTotalForms - 1;
+        }
+    }
+
+    // Initialize remove buttons for existing forms
+    document.querySelectorAll('.btn-danger').forEach(button => {
+        button.addEventListener('click', function(event) {
+            removeForm(this);
+        });
+    });
+});
 </script>
 {% endblock scripts %}
