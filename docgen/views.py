@@ -7,14 +7,6 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 import weasyprint
 # Create your views here.
-def generate_pdf(request):
-    # Assuming your model is named `MyModel` and has a `user` foreign key
-    #last_created_object = Invoice.objects.filter(user=user).latest('created_at')
-
-    return HttpResponse('Ok dude')
-
-
-
 # @staff_member_required
 def invoice_pdf(request, invoice_id):
     invoice = get_object_or_404(Invoice, pk=invoice_id)
