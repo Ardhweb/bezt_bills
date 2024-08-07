@@ -97,24 +97,34 @@
       <div class="invoice-info">
         <div class="billing">
           <h5>Billing To:</h5>
-          <p><strong>Name:</strong> {{ invoice.customer.name }}</p>
-          <p><strong>Address:</strong> {{ invoice.customer.address }}</p>
-          <p><strong>City, State, ZIP:</strong> {{ invoice.customer.city }}, {{ invoice.customer.state }} {{ invoice.customer.zip }}</p>
-          <p><strong>Email:</strong> {{ invoice.customer.email }}</p>
+           <div class="d-flex flex-column flex-wrap">
+            <p class="p-0 m-0"><strong>Name:</strong> {{ invoice.customer.name }}</p>
+            <p class="p-0 m-0"><strong>Address:</strong> {{ invoice.customer.address }}</p>
+            <p class="p-0 m-0"><strong>City, State, ZIP:</strong> {{ invoice.customer.city }}, {{ invoice.customer.state }} {{ invoice.customer.zip }}</p>
+            <p class="p-0 m-0"><strong>Email:</strong> {{ invoice.customer.email }}</p>
+           </div>
         </div>
+        {% comment %} {% if type_service == 'sellar' %} {% endcomment %}
         <div class="shipping">
-          <h5>Shipping To:</h5>
-          <p><strong>Name:</strong> {{ invoice.shipping.name }}</p>
-          <p><strong>Address:</strong> {{ invoice.shipping.address }}</p>
-          <p><strong>City, State, ZIP:</strong> {{ invoice.shipping.city }}, {{ invoice.shipping.state }} {{ invoice.shipping.zip }}</p>
-          <p><strong>Email:</strong> {{ invoice.shipping.email }}</p>
+            <h5>Shipping To:</h5>
+             <div class="d-flex flex-column flex-wrap">
+                <p class="p-0 m-0"><strong>Name:</strong> {{ invoice.shipping.name }}</p>
+                <p class="p-0 m-0"><strong>Address:</strong> {{ invoice.shipping.address }}</p>
+                <p class="p-0 m-0"><strong>City, State, ZIP:</strong> {{ invoice.shipping.city }}, {{ invoice.shipping.state }} {{ invoice.shipping.zip }}</p>
+                <p class="p-0 m-0"><strong>Email:</strong> {{ invoice.shipping.email }}</p>
+             </div>
         </div>
+        
+        {% comment %} {% else %}
+        {% endif %}
+       {% endcomment %}
+
       </div>
 
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
-            <th>Description</th>
+            <th>Details/Item</th>
             <th>Qty</th>
             <th>Price</th>
             <th>Total</th>

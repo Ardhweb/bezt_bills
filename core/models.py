@@ -9,3 +9,16 @@ class BaseModel(models.Model):
     
     class Meta:
         abstract = True
+
+
+class Address(BaseModel):
+    ADDRESS_TYPE_ROLE = (
+        ('invoicer','Invoicer'),
+        ('customer', 'Customer'),
+    )
+    lane_1 = models.CharField(max_length=50, blank=True)
+    city = models.CharField(max_length=50, blank=True)
+    state = models.CharField(max_length=50, blank=True)
+    zip_code = models.CharField(max_length=50, blank=True)
+    country =  models.CharField(max_length=50, blank=True)
+    address_type = models.CharField(max_length=50, blank=True, choices=ADDRESS_TYPE_ROLE)
