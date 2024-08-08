@@ -22,3 +22,7 @@ class Address(BaseModel):
     zip_code = models.CharField(max_length=50, blank=True)
     country =  models.CharField(max_length=50, blank=True)
     address_type = models.CharField(max_length=50, blank=True, choices=ADDRESS_TYPE_ROLE)
+    to_billing = models.BooleanField(default=False)
+    to_shipping = models.BooleanField(default=False)
+    to_permanent= models.BooleanField(default=False)
+    #invoice_fk = models.ForeignKey("invoicemodule.Invoice", on_delete=models.CASCADE)
