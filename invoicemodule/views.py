@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Invoice, InvoiceItem
 # Create your views here.
 # from .forms import InvoiceForm,InvoiceItemForm ,InvoiceFormSet
 from django.urls import reverse
@@ -10,76 +9,19 @@ from django.forms.models import (
     modelform_factory, 
     modelformset_factory
 )
-def preselect_template(*args, **kwargs):
-    #Return select tempate type
-    pass
-
-# def add_invoice(request, *args, **kwargs):
-#     if request.method == "POST":
-#         invoice_form = InvoiceForm(request.POST)
-#         item_formset = InvoiceFormSet(request.POST, instance=None)
-#         print(item_formset)
-
-#         if invoice_form.is_valid() and item_formset.is_valid():
-#             invoice_instance = invoice_form.save()
-#             item_formset.instance = invoice_instance
-#             item_formset.save()
-
-#             # Count the number of saved items
-#             total_items = item_formset.total_form_count()
-
-#             # Do something with the total_items, e.g., print it
-#             print("Total items:", total_items)
-
-#             url = reverse('invoicemodule:render-page', kwargs={'id': invoice_instance.pk})
-#             return redirect(url)
-#         else:
-#             context = {'invoice_form': invoice_form, 'item_formset': item_formset}
-#             return render(request, 'invoice/add_invoice.html', context)
-#     else:
-#         invoice_form = InvoiceForm()
-#         item_formset = InvoiceFormSet()
-#         context = {'invoice_form': invoice_form, 'item_formset': item_formset}
-#         return render(request, 'invoice/add_invoice.html', context)
-
-# from django.forms import modelformset_factory
-# from .models import Invoice, InvoiceItem
-# from .forms import InvoiceForm, InvoiceItemForm
-
-# from django.forms import inlineformset_factory
-
-# def add_invoice(request, *args, **kwargs):
-#     InvoiceItemFormSet = InvoiceFormSet
-                        
-#     if request.method == 'POST':
-#         invoice_form = InvoiceForm(request.POST)
-#         item_formset = InvoiceItemFormSet(request.POST, instance=None)
-#         print(item_formset)
-
-#         if invoice_form.is_valid() and item_formset.is_valid():
-#             invoice = invoice_form.save(commit=False)
-#             item_formset.instance = invoice
-#             invoice.save()
-#             item_formset.save()
-#             #return redirect('invoice_detail', invoice_id=invoice.pk)
-#             url = reverse('invoicemodule:render-page', kwargs={'id': invoice.pk})
-#             return redirect(url)
-       
-#     else:
-#         invoice_form = InvoiceForm()
-#         item_formset = InvoiceItemFormSet()
-
-#     context = {'invoice_form': invoice_form, 'item_formset': item_formset}
-#     return render(request, 'invoice/add_invoice.html', context)
-
-
-
 from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from .forms import InvoiceForm, InvoiceItemForm, InvoiceFormSet
 from .models import Invoice, InvoiceItem
+
+def preselect_template(*args, **kwargs):
+    #Return select tempate type
+    pass
+
+
+
 
 # Define the formset factory outside the request method
 def get_invoice_formset(extra=3):
