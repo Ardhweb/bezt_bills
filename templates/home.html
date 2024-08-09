@@ -1,9 +1,15 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
+<div class="d-grid gap-2 d-md-flex justify-content-md-start m-3">
+  {% if request.user.is_authenticated %}
+  <button class="btn btn-primary me-md-2" type="button">{{request.user.email}}</button>
+  {% else %}
+  {% endif %}
+  <a class="btn btn-dark" href="{% url "invoicemodule:add-invoice" %}">Create Invoice</a>
+</div>
 <div class="container">
-    
-    <table class="table border p-2 m-2" style="width:fit-content;">
+    <table id="invoiceTable" class="table border p-2 m-2" style="width:fit-content;">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -14,17 +20,19 @@
           </tr>
         </thead>
         <tbody>
-            {% for item in items  %}
-          <tr>
+          {% for invoice in invoices  %}
+          <tr id="{{invoice.pk}}">
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{item.invoice.pk}}</td>
-            <td>{{item.invoice.status}}</td>
+            <td>{{invoice.pk}}</td>
+            <td>{{invoice.status}}</td>
             <td><a href="" class=" btn btn-primary btn-sm">Edit</a></td>
-            <td><a href="{% url "invoicemodule:delete_item" item.invoice.pk %}" class=" btn btn-danger btn-sm">Delete</a></td>
+            <td><button onclick="delete_by_user_invoice(this)" type="button" value="{{invoice.pk}}" class=" btn btn-danger btn-sm">Delete</button></td>
           </tr>
           {% endfor %}
-          
         </tbody>
       </table>
 </div>
 {% endblock content %}
+{% block scripts %}
+{% include "scripts/global_scripts.html" %}
+{% endblock scripts %}

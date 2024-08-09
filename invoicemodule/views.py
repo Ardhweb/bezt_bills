@@ -84,9 +84,9 @@ def add_invoice(request):
 
 
 def homepage(request):
-    items = InvoiceItem.objects.all()
+    invoices = Invoice.objects.all()
     context = {
-        'items':items,
+        'invoices':invoices,
     }
     return render(request, 'home.html', context)
 

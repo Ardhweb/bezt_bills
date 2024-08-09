@@ -23,5 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('invoicemodule.urls')),
     path('docgen/',include('docgen.urls')),
+    path('api_source/',include('api_source.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

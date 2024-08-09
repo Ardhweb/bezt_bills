@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'docgen',
     'core',
+    'api_source',
 ]
 
 MIDDLEWARE = [

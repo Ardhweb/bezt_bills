@@ -1,0 +1,43 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function getCsrfToken() {
+        return '{{ csrf_token }}';  // Django template tag to insert CSRF token
+    }
+
+    function delete_by_user_invoice(button) {
+        // Retrieve the button element and its value attribute
+        const valueId = button.getAttribute('value');  // Retrieve value attribute
+        console.log(valueId);
+        const url = '/api_source/delete-invoice-by-user/' + encodeURIComponent(valueId);  // Construct URL
+
+        // Use jQuery's $.ajax method to send the POST request
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: 'application/json',  // Set content type for JSON
+            headers: {
+                'X-CSRFToken': getCsrfToken()  // Include CSRF token in the headers
+            },
+            success: function(response) {
+                console.log('Success:', response);
+
+                // Select the table with id invoiceTable
+                const invoiceTable = document.getElementById('invoiceTable');
+                if (invoiceTable) {
+                    // Find the row with the id matching valueId within the invoiceTable
+                    const rowToRemove = invoiceTable.querySelector(`tr[id="${valueId}"]`);
+                    if (rowToRemove) {
+                        rowToRemove.remove();  // Remove the row from the table
+                    } else {
+                        console.error('Row with ID:', valueId, 'not found within invoiceTable.');
+                    }
+                } else {
+                    console.error('Table with ID invoiceTable not found.');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', status, error);
+            }
+        });
+    }
+</script>
