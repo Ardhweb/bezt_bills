@@ -1,8 +1,13 @@
 from django.db import models
-from core.models import BaseModel
+from core.models import BaseModel,Address
 from django.contrib.auth.models import User
 # Create your models here.
 from django.utils import timezone
+
+class Invoicer(BaseModel):
+    company_name =  models.CharField(max_length=250, blank=True, null=True)
+    origin_address = models.ForeignKey(Address,  on_delete=models.CASCADE, null=True)
+  
 
 class Invoice(BaseModel):
     invoice_id = models.AutoField(primary_key=True)
@@ -17,9 +22,12 @@ class Invoice(BaseModel):
         ('Expired','Expired'),
     )
     status = models.CharField(max_length=255, choices=INVOICE_STATUS,  null=True)
-    due_date = models.DateField(auto_now=True)
-    expire_date = models.DateField(auto_now=True)
+    due_date = models.DateField(blank=True, null=True)
+    expire_date = models.DateField(blank=True, null=True)
     mark_delete = models.BooleanField(default=False)
+    billing_address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True)
+    shipping_address = models.ForeignKey(Address,related_name="ship_address", on_delete=models.CASCADE, null=True)
+    invoicer = models.ForeignKey(Invoicer, on_delete=models.SET_NULL, null=True)
 
 
 
@@ -28,4 +36,6 @@ class InvoiceItem(BaseModel):
     qty = models.PositiveIntegerField(db_column='quntity')
     price =  models.CharField(max_length=250, blank=True, null=True)
     invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL, null=True)
+
+
 

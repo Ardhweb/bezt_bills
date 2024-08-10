@@ -1,18 +1,16 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<h3>Invoice Preview</h3>
-    
-<p>Your invoice ID is: {{ invoice_id }}</p>
-<div class="container d-flex  justify-content-center ">
-    
+<div class="container d-flex flex-column align-items-start">
+  <h3>Invoice Preview</h3>
+  <p>Your invoice ID is: {{ invoice_id }}</p>
+</div>
 
-  <p>Click the link below to download your invoice:</p>
-      
-      <!-- Link to download the invoice -->
-      <a class="btn btn-sm btn-dark text-center align-self-center" href="{% url "docgen:download_invoice" invoice_id %}" >Download</a>
-    
-  </div>
+<div class="container d-flex align-items-center justify-content-center mb-2">
+  <p class="mb-0">Click to download your invoice:</p>
+  <a class="btn btn-sm btn-dark ms-3" href="{% url 'docgen:download_invoice' invoice_id %}">Download</a>
+</div>
+
       
 
 <div class="a4-page-container">
