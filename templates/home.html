@@ -1,6 +1,8 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
+ <!-- Font Awesome CSS -->
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <div class="d-grid gap-2 d-md-flex justify-content-md-start m-3">
   {% if request.user.is_authenticated %}
   <button class="btn btn-primary me-md-2" type="button">{{request.user.email}}</button>
@@ -15,7 +17,7 @@
             <th scope="col">#</th>
             <th scope="col">Item</th>
             <th scope="col">Status</th>
-            <th scope="col">Edit</th>
+            <th scope="col">View</th>
             <th scope="col">Delete</th>
           </tr>
         </thead>
@@ -25,7 +27,7 @@
             <th scope="row">{{forloop.counter}}</th>
             <td>{{invoice.pk}}</td>
             <td>{{invoice.status}}</td>
-            <td><a href="" class=" btn btn-primary btn-sm">Edit</a></td>
+            <td><a href="{% url 'docgen:preview_page' invoice.pk  %}" class=" btn btn-primary btn-sm">View</a></td>
             <td><button onclick="delete_by_user_invoice(this)" type="button" value="{{invoice.pk}}" class=" btn btn-danger btn-sm">Delete</button></td>
           </tr>
           {% endfor %}
@@ -35,7 +37,7 @@
 
 <div class="container mt-4">
   
-  <div class="d-flex align-content-stretch flex-wrap">
+  <div class="d-flex align-content-stretch flex-wrap justify-content-center">
     <div class=" w-50 h-50 shadow p-5  ms-1 me-1 mb-0 mt-2 bg-body-tertiary rounded">Flex item</div>
     <div class=" w-15 h-15 shadow p-5  ms-1 me-1 mb-0 mt-2 bg-body-tertiary rounded">Flex item</div>
     <div class=" w-15 h-15 shadow p-5  ms-1 me-1 mb-0 mt-2 bg-body-tertiary rounded">Flex item</div>
@@ -45,6 +47,10 @@
     
   </div>
 </div>
+
+
+
+
 {% endblock content %}
 {% block scripts %}
 {% include "scripts/global_scripts.html" %}

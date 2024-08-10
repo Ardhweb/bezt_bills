@@ -14,10 +14,13 @@ class Invoice(BaseModel):
         ('Pending','Pending'),
         ('Paid','Paid'),
         ('Done','Done'),
+        ('Expired','Expired'),
     )
     status = models.CharField(max_length=255, choices=INVOICE_STATUS,  null=True)
-    created_at = models.DateTimeField(default=timezone.now)
-    updated_at = models.DateTimeField(auto_now=True)
+    due_date = models.DateField(auto_now=True)
+    expire_date = models.DateField(auto_now=True)
+    mark_delete = models.BooleanField(default=False)
+
 
 
 class InvoiceItem(BaseModel):

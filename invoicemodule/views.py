@@ -58,7 +58,8 @@ def add_invoice(request):
             invoice = invoice_form.save()
             item_formset.instance = invoice
             item_formset.save()
-            return redirect(reverse('invoicemodule:render-page', kwargs={'id': invoice.pk}))
+            #return redirect(reverse('invoicemodule:render-page', kwargs={'id': invoice.pk}))
+            return redirect(reverse('docgen:preview_page', kwargs={'invoice_id': invoice.pk}))
         else:
             print("Invoice form errors:", invoice_form.errors)
             print("Item formset errors:", item_formset.errors)

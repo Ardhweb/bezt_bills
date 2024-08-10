@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <div class="container">
+    
+<h1>Invoice Preview</h1>
+    
+<p>Your invoice ID is: {{ invoice_id }}</p>
+
+<p>Click the link below to download your invoice:</p>
+    
+    <!-- Link to download the invoice -->
+    <a class="btn btn-sm btn-dark" href="{% url "docgen:download_invoice" invoice_id %}" >Download</a>
+  </div>
+    
+{% endblock content %}
