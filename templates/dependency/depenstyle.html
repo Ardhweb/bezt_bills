@@ -15,4 +15,56 @@
       color: #fff;
       text-decoration: none;
     }
+   /* Simulates a smaller preview of an A4-sized page */
+
+
+/* Load custom fonts (example) */
+@font-face {
+  font-family: 'CustomFont';
+  src: url('/path/to/your/font.woff2') format('woff2'),
+       url('/path/to/your/font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Center and scale the A4-sized page */
+.a4-page {
+  width: 210mm; /* A4 width */
+  height: 297mm; /* A4 height */
+  padding: 10mm; /* Adjust padding as needed */
+ 
+  box-sizing: border-box;
+  background-color: #fff;
+  font-family: 'CustomFont', sans-serif; /* Apply custom font */
+  margin: 20px 0; /* Margins for top and bottom */
+  /* No overflow settings here */
+}
+
+/* Container to center and handle viewport overflow */
+.a4-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Full viewport height */
+  width: auto; /*   width: 100vw;Full viewport width */
+  background-color: #f0f0f0;
+  overflow: auto; /* Enable scrolling if the content overflows */
+  position: relative; /* Allows z-index to work */
+  box-sizing: border-box; /* Ensure padding and border are included in the element’s total width and height */
+}
+
+/* Additional styling for hidden content */
+.hidden-content {
+  position: absolute; /* Places content in relation to the container */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent overlay */
+  z-index: 0; /* Ensure it's below the A4 page */
+  display: none; /* Hidden by default */
+}
+
+
+
   </style>

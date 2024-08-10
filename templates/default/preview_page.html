@@ -1,16 +1,25 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-  <div class="container">
-    
-<h1>Invoice Preview</h1>
+<h3>Invoice Preview</h3>
     
 <p>Your invoice ID is: {{ invoice_id }}</p>
+<div class="container d-flex  justify-content-center ">
+    
 
-<p>Click the link below to download your invoice:</p>
+  <p>Click the link below to download your invoice:</p>
+      
+      <!-- Link to download the invoice -->
+      <a class="btn btn-sm btn-dark text-center align-self-center" href="{% url "docgen:download_invoice" invoice_id %}" >Download</a>
     
-    <!-- Link to download the invoice -->
-    <a class="btn btn-sm btn-dark" href="{% url "docgen:download_invoice" invoice_id %}" >Download</a>
   </div>
-    
+      
+
+<div class="a4-page-container">
+  <div class="a4-page">
+    {{ invoice_content|safe }}
+      <!-- Add more content as needed -->
+  </div>
+</div>
+ 
 {% endblock content %}

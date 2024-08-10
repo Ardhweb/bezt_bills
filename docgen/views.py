@@ -67,10 +67,22 @@ def download_invoice(request, invoice_id):
     # success_url = reverse('docgen:preview_page', args=[invoice_id])
     # return HttpResponseRedirect(success_url)
 
+def preview_re(invoice_id):
+    invoice = get_object_or_404(Invoice, pk=invoice_id)
+    items = InvoiceItem.objects.filter(invoice=invoice)
+    template_name_with_location = 'default/invoice/invo_temp/default_invoice_template.html'
+    html_preview = render_to_string(template_name_with_location, {'invoice': invoice, 'items': items})
+    return  html_preview
+
 
 
 def preview_page(request, invoice_id):
+    invoice = get_object_or_404(Invoice, pk=invoice_id)
+    items = InvoiceItem.objects.filter(invoice=invoice)
+    template_name_with_location = 'default/invoice/invo_temp/default_invoice_template.html'
+    html_preview = preview_re(invoice_id)
     context ={
-        'invoice_id':invoice_id
+        'invoice_id':invoice_id,
+        'invoice_content':html_preview
     }
     return render(request,'default/preview_page.html', context)
