@@ -5,24 +5,27 @@
 
 <!--Hero Section-->
 <section class="bg-success-subtle">
-  <div class="d-flex justify-content-between  ">
-    <div class="d-flex flex-column align-items-stretch m-4 p-4">
-      <h3 class="fs-3 mt-4 fw-semibold ">Welcome, to  Bezt</h3>
-      <p class="mt-2">Create your service by own , invoice, todo, share etc</p>
-       <div class="d-flex justify-content-start gap-2 mt-3">
-        <a type="button" class="btn btn-primary btn-sm">Small button</a>
-        <a type="button" class="btn btn-dark btn-sm"  href="{% url "invoicemodule:add-invoice" %}">Create Invoice</a>
-       </div>
-
-
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex flex-column align-items-stretch m-4 p-4 animate__animated  animate__fadeInLeftBig animate__delay-1s">
+      <h3 class="fs-3 mt-4 fw-semibold animate__fadeInLeftBig">Welcome, to Bezt</h3>
+      <p class="mt-2">
+        Easy-to-Use and User-Friendly Tools for Every Task.<br>
+        Invoices, To-Dos, Expense Tracking, and More—All Completely Free.
+      </p>
+      
+      
+      <div class="d-flex justify-content-start gap-2 mt-3">
+        <a type="button" class="btn btn-primary ">Todo Track</a>
+        <a type="button" class="btn btn-dark " href="{% url 'invoicemodule:add-invoice' %}">Create Invoice</a>
+      </div>
     </div>
-    <div class="d-flex flex-column">
-      <img class="img-fluid"src="{% static 'logo/bezt_bills_initial logo1.png' %}">
-
-
+    
+    <div class="d-flex flex-row-reverse justify-content-end animate__animated  animate__fadeInRight animate__delay-2s" style="flex-basis: 40%;">
+      <img class="rounded ms-auto d-block" src="{% static 'hero_imgs/202408-01.png' %}" style="width: 100%; height: auto; object-fit: cover; z-index:9999;margin-bottom:-25%;">
     </div>
   </div>
 </section>
+
  <!-- Font Awesome CSS -->
  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <div class="d-grid gap-2 d-md-flex justify-content-md-start m-3">
@@ -30,7 +33,7 @@
   <button class="btn btn-primary me-md-2" type="button">{{request.user.email}}</button>
   {% else %}
   {% endif %}
-  <a class="btn btn-dark" href="{% url "invoicemodule:add-invoice" %}">Create Invoice</a>
+ 
 </div>
 <div class="container">
     <table id="invoiceTable" class="table border p-2 m-2" style="width:fit-content;">
