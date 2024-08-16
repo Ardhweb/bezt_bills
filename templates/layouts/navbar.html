@@ -1,31 +1,68 @@
 <!-- As a link -->
 {% load static %}
-<nav class="navbar bg-body-tertiary ">
+
+
+
+<nav class="navbar bg-body-tertiary" style="height: 8vh;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-            <a class="navbar-brand" href="#">
-                <img width="50px" height="50px" src="{% static 'logo/bezt_bills_initial logo1.png' %}">
-              </a>
+        <div class="row w-100">
+            <div class="col">
+                <a class="navbar-brand" href="#">
+                    <img width="50px" height="50px" src="{% static 'logo/bezt_bills_initial logo1.png' %}">
+                </a>
+            </div>
+            <div class="col-md-auto d-flex justify-content-end">
+                <ul class="nav">
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link text-dark" href="{% url "invoicemodule:home" %}">
+                            Home
+                        </a>
+                        <ul class="dropdown-menu mt-2 pt-2" aria-labelledby="navbarDropdown1">
+                            <li>
+                                <div class="p-3">
+                                    <h5 class="dropdown-header">Custom Modal 1</h5>
+                                    <p>This is the content of Custom Modal 1.</p>
+                                    <button class="btn btn-primary">Save changes</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown me-3">
+                        <a class="nav-link text-dark" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Link 1
+                        </a>
+                        <ul class="dropdown-menu mt-2 pt-2" aria-labelledby="navbarDropdown2">
+                            <li>
+                                <div class="p-3">
+                                    <h5 class="dropdown-header">Custom Modal 2</h5>
+                                    <p>This is the content of Custom Modal 2.</p>
+                                    <button class="btn btn-primary">Save changes</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-dark" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Link 2
+                        </a>
+                        <ul class="dropdown-menu mt-2 pt-2" aria-labelledby="navbarDropdown3">
+                            <li>
+                                <div class="p-3">
+                                    <h5 class="dropdown-header">Custom Modal 3</h5>
+                                    <p>This is the content of Custom Modal 3.</p>
+                                   
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col text-end">
+                <div class="d-inline-block">
+                    <button class="btn btn-sm me-2" type="button"><a href="">Login</a></button>
+                    <button class="btn btn-dark btn-sm" type="button"><a href="">Signup</a></button>
+                </div>
+            </div> 
         </div>
-        <div class="col-md-auto">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url "invoicemodule:home" %}">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-               
-              </ul>
-        </div>
-        {% comment %} <div class="col">
-          3 of 3
-        </div> {% endcomment %}
-      </div>
     </div>
 </nav>
-  
