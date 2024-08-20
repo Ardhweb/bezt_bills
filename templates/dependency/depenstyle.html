@@ -10,6 +10,38 @@
     .hover-shadow:hover {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+    /* Base styling for the footer link */
+footer a {
+  display: inline-block;
+  color: #333; /* Initial color of the link */
+  text-decoration: none;
+  position: relative; /* Needed for the icon positioning */
+  padding-right: 20px; /* Space for the icon */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+/* Styling for the icon that will appear on hover */
+footer a::after {
+  content: "\2197"; /* Unicode for FontAwesome arrow-right icon (as an example) */
+  font-family: FontAwesome; /* Replace with your icon font family */
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover state for the footer link */
+footer a:hover {
+  /*color: #007bff;  Change the link color on hover */
+}
+
+/* Hover state for the icon */
+footer a:hover::after {
+  opacity: 1;
+  transform: translateX(0); /* Slide the icon into place */
+}
+
    
    /* Simulates a smaller preview of an A4-sized page */
 
@@ -72,6 +104,8 @@
   background:hsla(232, 73%, 65%, 1);
  
 }
+
+
 
 
 
