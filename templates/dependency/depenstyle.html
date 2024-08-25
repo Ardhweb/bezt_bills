@@ -106,8 +106,109 @@ footer a:hover::after {
 }
 
 
+/* Custom feature classes */
+.carding:hover {
+  transform: scale(1.05);
+}
+
+.mate-icons {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.pricing-icon {
+  filter: contrast(1.2) saturate(1.2);
+  width: 60px;
+}
+
+.pricing-card-body {
+    padding: 20px;
+}
+
+.pricing-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.pricing-price {
+    font-size: 2rem;
+    color: #007bff; /* Bootstrap's primary color */
+}
+
+.pricing-features {
+    font-size: 1rem;
+    margin: 20px 0;
+}
+
+.pricing-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+
+/* Custom feature classes */
+.carding:hover {
+  transform: scale(1.05);
+}
+
+.mate-icons {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.info-icon {
+  filter: contrast(1.2) saturate(1.2);
+ 
+}
+
+.info-card-body {
+    padding: 20px;
+}
+
+.info-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.info-description {
+    font-size: 1rem;
+    color: #6c757d; /* Bootstrap's muted text color */
+}
+
+.info-points {
+    font-size: 1rem;
+    margin: 20px 0;
+}
 
 
 
 
-  </style>
+
+/* Shuffle effect on hover */
+.carding-shuffle:hover {
+  transform: rotate(3deg) scale(1.07);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Prevent interaction while scrolling */
+.carding-shuffle {
+  overflow: hidden; /* Prevents overflow due to transformation */
+}
+
+.carding-shuffle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transition: transform 0.3s ease;
+}
+
+.carding-shuffle:hover::before {
+  transform: rotate(-6deg);
+}
+
+
+</style>

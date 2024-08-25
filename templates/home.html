@@ -37,7 +37,7 @@ Home
   {% endif %}
  
 </div>
-<div class="container">
+{% comment %} <div class="container">
     <table id="invoiceTable" class="table border p-2 m-2" style="width:fit-content;">
         <thead>
           <tr>
@@ -81,45 +81,129 @@ Home
       </div>
     </div>
   </div>
-</div>
+</div> {% endcomment %}
 
 <!-- Feature Sections-->
-<div class="container mt-5 mb-5">
-  <div class="row justify-content-evenly">
-      <!-- Column 1 -->
-      <div class="col-sm-3 border rounded p-0 ">
-          <div class="card bg-success-subtle text-center mb-3 rounded border-bottom-0">
-              <div class="card-body">
-                  <i class="bi bi-download" style="font-size: 2rem;"></i>
-              </div>
-          </div>
-          <h3 class="text-center fs-5 mb-2 fw-semibold">Column 1</h3>
-         
-          <ul class="list-unstyled text-center">
-            <li class="list-group-item border-0">
-                <i class="bi bi-check-circle text-success me-2"></i> Point 1
-            </li>
-            <li class="list-group-item border-0">
-                <i class="bi bi-check-circle text-success me-2"></i> Point 2
-            </li>
-            <li class="list-group-item border-0">
-                <i class="bi bi-check-circle text-success me-2"></i> Point 3
-            </li>
-            <li class="list-group-item border-0">
-                <i class="bi bi-x-circle text-danger me-2"></i> Point 4
-            </li>
-        </ul>
-        
-       
-         
-      </div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <!-- Information Column 1: Free -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center info-card-body">
+                    <img src="https://placehold.co/400x200" alt="Free Icon" class="info-icon mb-3 img-fluid object-fit">
+                    <h5 class="card-title info-title mb-4">Free</h5>
+                    <p class="info-description mb-4">Access basic tools and features zero cost. Perfect for those just starting out.</p>
+                    <ul class="list-unstyled info-points">
+                        <li><i class="material-icons mate-icons text-success">check</i> No hidden fees</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Basic support</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Limited features</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-sm  float-right">more</a>
+                </div>
+            </div>
+        </div>
 
+        <!-- Information Column 2: Ease Create -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center info-card-body">
+                    <img src="https://placehold.co/400x200" alt="Ease Create Icon" class="info-icon mb-3">
+                    <h5 class="card-title info-title mb-4">Ease Create</h5>
+                    <p class="info-description mb-4">Easily create invoice with intuitive tools designed for all people.</p>
+                    <ul class="list-unstyled info-points">
+                        <li><i class="material-icons mate-icons text-success">check</i> User-friendly interface</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Shop Owner/Undefind Services/</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Templates available</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-sm float-right">more</a>
+                </div>
+            </div>
+        </div>
 
-     
-  </div>
+        <!-- Information Column 3: Download -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center info-card-body">
+                    <img src="https://placehold.co/400x200" alt="Download Icon" class="info-icon mb-3">
+                    <h5 class="card-title info-title mb-4">Download</h5>
+                    <p class="info-description mb-4">Download your invoice in  formats, ensuring compatibility with your needs.</p>
+                    <ul class="list-unstyled info-points">
+                        {% comment %} <li><i class="material-icons mate-icons text-success">check</i> Multiple formats</li> {% endcomment %}
+                        <li><i class="material-icons mate-icons text-success">check</i> Pdf formats</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> High-quality exports</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Compatible with various tools</li>
+                    </ul>
+                    <a href="#" class="btn btn-success btn-sm  float-right">more</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+{% comment %} <!--Pricing Points-->
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <!-- Pricing Column 1 -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center pricing-card-body">
+                    <img src="https://undraw.co/api/illustrations/random?color=primary" alt="Basic Plan Icon" class="pricing-icon mb-3">
+                    <h5 class="card-title pricing-title mb-4">Basic Plan</h5>
+                    <h2 class="pricing-price text-primary mb-4">$19.99</h2>
+                    <ul class="list-unstyled pricing-features">
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 1</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 2</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 3</li>
+                        <li><i class="material-icons mate-icons text-danger">close</i> Feature 4</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3 pricing-button">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Column 2 -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center pricing-card-body">
+                    <img src="https://undraw.co/api/illustrations/random?color=primary" alt="Standard Plan Icon" class="pricing-icon mb-3">
+                    <h5 class="card-title pricing-title mb-4">Standard Plan</h5>
+                    <h2 class="pricing-price text-primary mb-4">$49.99</h2>
+                    <ul class="list-unstyled pricing-features">
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 1</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 2</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 3</li>
+                        <li><i class="material-icons mate-icons text-danger">close</i> Feature 4</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3 pricing-button">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Column 3 -->
+        <div class="col-md-4">
+            <div class="card carding shadow-lg mb-4">
+                <div class="card-body text-center pricing-card-body">
+                    <img src="https://undraw.co/api/illustrations/random?color=primary" alt="Premium Plan Icon" class="pricing-icon mb-3">
+                    <h5 class="card-title pricing-title mb-4">Premium Plan</h5>
+                    <h2 class="pricing-price text-primary mb-4">$99.99</h2>
+                    <ul class="list-unstyled pricing-features">
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 1</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 2</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 3</li>
+                        <li><i class="material-icons mate-icons text-success">check</i> Feature 4</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary mt-3 pricing-button">Choose Plan</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
 
 
 
