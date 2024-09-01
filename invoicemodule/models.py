@@ -35,7 +35,7 @@ class InvoiceItem(BaseModel):
     desc =  models.CharField(max_length=250, blank=True, null=True)
     qty = models.PositiveIntegerField(db_column='quntity')
     price =  models.CharField(max_length=250, blank=True, null=True)
-    invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL, null=True)
+    invoice = models.ForeignKey(Invoice, related_name='items' ,on_delete=models.SET_NULL, null=True)
 
 
 

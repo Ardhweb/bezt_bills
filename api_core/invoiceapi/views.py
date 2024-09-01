@@ -37,6 +37,6 @@ def invoice_create(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'GET':
-        invoices = Invoice.objects.all()
+        invoices = Invoice.objects.filter(user=request.user)
         serializer = InvoiceSerializer(invoices, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
