@@ -63,11 +63,24 @@ def invoice_update(request, pk=None):
 
 @api_view(['POST', 'GET'])
 def invoice_addnew_item(request, pk):
+    #param : invoice id
+    #data fields type:  desc:str, qty:int, price:str
+    '''
+     JSON format for endpoint data:
+      {
+         "desc": "Sample item description",
+         "qty": 10,
+         "price": "100.00"
+     }
+    This format is required as InvoiceItem is created separately.
+    '''
+    
     if request.method == 'POST':
         invoice = get_object_or_404(Invoice, invoice_id=pk)
         serializer = AddInvoiceItemSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(invoice=invoice)
+            #serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
@@ -75,26 +88,3 @@ def invoice_addnew_item(request, pk):
         invoices = Invoice.objects.filter(pk=pk)
         serializer = InvoiceSerializer(invoices, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-
-
-   
-
-'''
-@api_view(['POST', 'GET'])
-def invoice_addnew_item(request, pk):
-    if request.method == "POST":
-        try:
-            invoice = get_object_or_404(Invoice, invoice_id=pk)
-            serializer = AddInvoiceItemSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save(invoice=invoice)
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except Invoice.DoesNotExist or serializer.errors:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'GET':
-        invoice = Invoice.objects.filter(pk=pk)
-        serializer = InvoiceSerializer(invoice)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-'''
